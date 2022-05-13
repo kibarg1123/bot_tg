@@ -1,5 +1,5 @@
 import requests
-from bs4 import BeatifulSoup
+from bs4 import BeautifulSoup
 from datetime import datetime
 import time
 
@@ -9,10 +9,10 @@ def get_first_news():
     }
     url = "https://www.securitylab.ru/news/"
     r = requests.get(url=url, headers=headers)
-    soup = BeatifulSoup(r.text, "lxml")
+    soup = BeautifulSoup(r.text, "lxml")
     articles_cards = soup.find_all("a", class_="article-card")
 
-    for articles in articles_cards:
+    for article in articles_cards:
         article_title = article.find("h2", class_="article-card-title").text.strip()
         article_desc = article.find("p").text.strip()
         article_url = f'https://www.securitylab.ru{article_get("href")}'
